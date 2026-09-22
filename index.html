@@ -1,261 +1,206 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Currículum Iman Kebour Dahmoun</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Currículum Iman Kebour Dahmoun</title>
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap');
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Georgia&family=Noto+Serif:wght@400;600;700&display=swap');
 
-    :root{
-      --bg: #ffffff;
-      --ink: #0a0a0a;
-      --ink-soft: #6b6b6b;
-      --line: #dcdcdc;
-    }
+  :root{
+    --ink: #111111;
+    --line: #111111;
+  }
 
-    * { box-sizing: border-box; }
+  * { box-sizing: border-box; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 40px 20px;
-      background: #f4f4f4;
-      color: var(--ink);
-    }
+  body {
+    font-family: 'Noto Serif', Georgia, 'Times New Roman', serif;
+    margin: 0;
+    padding: 50px 20px;
+    background: #eeeeee;
+    color: var(--ink);
+  }
 
-    .container {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      max-width: 760px;
-      margin: 0 auto;
-      background: #ffffff;
-      border: 1px solid var(--ink);
-      overflow: hidden;
-    }
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 50px 55px 60px;
+    border: 1px solid #ddd;
+  }
 
-    .left {
-      background: #ffffff;
-      padding: 40px 32px;
-      color: var(--ink);
-      border-right: 1px solid var(--line);
-    }
+  /* HEADER */
+  .header { text-align: center; margin-bottom: 26px; }
 
-    .photo {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 28px;
-    }
+  .photo {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--ink);
+    margin: 0 auto 14px;
+    display: block;
+  }
 
-    .photo img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--ink);
-    }
+  h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
 
-    .section-title-left {
-      background: var(--ink);
-      color: #ffffff;
-      padding: 6px 12px;
-      font-family: 'Archivo', sans-serif;
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.04em;
-      margin: 26px 0 12px;
-      display: inline-block;
-    }
+  .contact-line {
+    font-size: 13px;
+    margin-top: 6px;
+    color: #222;
+  }
 
-    .left p { color: var(--ink-soft); }
+  /* SECTIONS */
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: 1.4px solid var(--line);
+    padding-bottom: 3px;
+    margin: 26px 0 10px;
+  }
 
-    .left ul {
-      padding-left: 18px;
-      line-height: 1.85;
-      margin: 0;
-      list-style: none;
-    }
-    .left ul li{
-      color: var(--ink-soft);
-      position: relative;
-      padding-left: 14px;
-    }
-    .left ul li::before{
-      content:"";
-      position:absolute;
-      left:0; top:9px;
-      width:6px; height:1.5px;
-      background: var(--ink);
-    }
+  p.summary {
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0;
+  }
 
-    .right {
-      padding: 46px 46px 50px;
-    }
+  .entry { margin-bottom: 14px; }
+  .entry:last-child { margin-bottom: 0; }
 
-    h1 {
-      font-family: 'Archivo', sans-serif;
-      margin: 0;
-      font-size: 34px;
-      letter-spacing: -0.01em;
-      font-weight: 800;
-      line-height: 1.08;
-      color: var(--ink);
-    }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+  }
+  .row .left  { font-weight: 700; font-size: 13.5px; }
+  .row .right { font-size: 13px; white-space: nowrap; }
 
-    .subtitle {
-      font-family: 'Inter', sans-serif;
-      letter-spacing: 0.12em;
-      color: var(--ink-soft);
-      margin: 10px 0 30px;
-      font-weight: 500;
-      font-size: 14px;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 20px;
-    }
+  .row.sub .left  { font-style: italic; font-weight: 400; font-size: 13px; }
+  .row.sub .right { font-style: italic; font-size: 12.5px; color: #333; }
 
-    .section-title-right {
-      background: var(--ink);
-      color: #ffffff;
-      padding: 7px 14px;
-      font-family: 'Archivo', sans-serif;
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.04em;
-      display: inline-block;
-      margin: 28px 0 12px;
-    }
+  ul.bullets {
+    margin: 6px 0 0;
+    padding-left: 18px;
+  }
+  ul.bullets li {
+    font-size: 13px;
+    line-height: 1.55;
+    margin-bottom: 3px;
+  }
 
-    h3{
-      font-family:'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--ink);
-      margin: 0 0 4px;
-    }
+  .skills-line, .lang-line {
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 0;
+  }
+  .skills-line strong, .lang-line strong { font-weight: 700; }
 
-    p, li {
-      font-size: 14.5px;
-      line-height: 1.7;
-      color: var(--ink-soft);
-    }
-
-    .right ul {
-      margin: 10px 0 0;
-      padding-left: 0;
-      list-style: none;
-    }
-    .right ul li{
-      position: relative;
-      padding-left: 16px;
-      margin-bottom: 6px;
-    }
-    .right ul li::before{
-      content:"";
-      position:absolute;
-      left:0; top:9px;
-      width:6px; height:1.5px;
-      background: var(--ink);
-    }
-
-    .job-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 15.5px;
-      font-weight: 700;
-      color: var(--ink);
-      margin: 0 0 2px;
-    }
-
-    .job-meta {
-      font-size: 12.5px;
-      color: var(--ink-soft);
-      font-weight: 500;
-      margin: 0 0 10px;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-    }
-
-    strong{ color: var(--ink); font-weight: 600; }
-
-    @media (max-width: 620px){
-      .container{ grid-template-columns: 1fr; }
-    }
-  </style>
+  @media (max-width: 560px){
+    .page{ padding: 34px 22px 40px; }
+    .row{ flex-direction: column; gap: 2px; }
+    .row .right{ white-space: normal; }
+  }
+</style>
 </head>
 
 <body>
-  <div class="container">
+  <div class="page">
 
-    <div class="left">
-      <div class="photo">
-        <img src="imagenes/iman.jpg" alt="Foto" />
+    <div class="header">
+      <img class="photo" src="imagenes/iman.jpg" alt="Foto de Iman Kebour Dahmoun" />
+      <h1>Iman Kebour Dahmoun</h1>
+      <div class="contact-line">Valencia, Valencia · CP 46015 · kebouriman6@gmail.com · 602 099 388</div>
+    </div>
+
+    <div class="section-title">Perfil</div>
+    <p class="summary">
+      Estudiante de Desarrollo de Aplicaciones Web con interés en el diseño y la programación full-stack.
+      Busco una oportunidad para seguir aprendiendo y aplicar mis conocimientos en proyectos reales.
+    </p>
+
+    <div class="section-title">Formación</div>
+
+    <div class="entry">
+      <div class="row">
+        <div class="left">CEAC</div>
+        <div class="right">Valencia, España</div>
       </div>
+      <div class="row sub">
+        <div class="left">Grado Superior en Desarrollo de Aplicaciones Web (DAW)</div>
+        <div class="right">2025 – 2027</div>
+      </div>
+    </div>
 
-      <div class="section-title-left">Contacto</div>
-      <p> 602099388</p>
-      <p> kebouriman6@gmail.com</p>
-      <p> Valencia, Valencia<br>CP 46015</p>
+    <div class="entry">
+      <div class="row">
+        <div class="left">IES Benicalap</div>
+        <div class="right">Valencia, España</div>
+      </div>
+      <div class="row sub">
+        <div class="left">Bachillerato de Ciencias</div>
+        <div class="right">2022 – 2024</div>
+      </div>
+    </div>
 
-      <div class="section-title-left">Idiomas</div>
-      <ul>
-        <li>Español - nativo</li>
-        <li>Árabe - nativo</li>
-        <li>Inglés - nivel medio</li>
-        <li>Francés - nivel medio</li>
+    <div class="section-title">Experiencia</div>
+
+    <div class="entry">
+      <div class="row">
+        <div class="left">Tuatem</div>
+        <div class="right">Valencia, España</div>
+      </div>
+      <div class="row sub">
+        <div class="left">Prácticas de formación — 1º de DAW</div>
+        <div class="right">Curso 2025 – 2026</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="row">
+        <div class="left">Community Manager</div>
+        <div class="right">Proyecto personal</div>
+      </div>
+      <div class="row sub">
+        <div class="left">Desarrollo full-stack</div>
+        <div class="right">2025</div>
+      </div>
+      <ul class="bullets">
+        <li>Desarrollo de API con Python y FastAPI, usando SQLAlchemy para la comunicación con la base de datos.</li>
+        <li>Diseño y gestión de una base de datos MySQL alojada en Aiven.</li>
+        <li>Despliegue de la aplicación en una arquitectura serverless con AWS Lambda y AWS SAM, usando Mangum como adaptador.</li>
+        <li>Despliegue del frontend (React + Vite) en Vercel.</li>
+        <li>Resolución de problemas de producción: configuración de CORS, cold starts en Lambda y conexión estable con base de datos externa.</li>
       </ul>
     </div>
 
-    <div class="right">
-      <h1>IMAN<br>KEBOUR DAHMOUN</h1>
-      <div class="subtitle">Desarrolladora web</div>
+    <div class="section-title">Competencias y habilidades</div>
+    <p class="skills-line">Aprendizaje autónomo, pensamiento lógico, creatividad en el diseño web, organización y disciplina, capacidad de adaptación.</p>
 
-      <div class="section-title-right">Sobre mí</div>
-      <p>
-        Soy una estudiante de desarrollo web con interés en el diseño y la programación full-stack.
-        Busco una oportunidad para seguir aprendiendo y aplicar mis conocimientos en proyectos reales.
-      </p>
+    <div class="section-title">Conocimientos informáticos</div>
+    <p class="skills-line">
+      <strong>Lenguajes y frameworks:</strong> HTML, CSS, JavaScript, Python, FastAPI, SQLAlchemy, PHP<br>
+      <strong>Bases de datos:</strong> MySQL<br>
+      <strong>Despliegue e infraestructura:</strong> AWS Lambda, AWS SAM, Vercel
+    </p>
 
-      <div class="section-title-right">Formación</div>
-      <h3>Bachillerato</h3>
-      <p>Bachillerato de ciencias – IES Benicalap (2022-2024)</p>
-
-      <h3>Formación Profesional – CEAC</h3>
-      <p>Grado superior de Desarrollo de Aplicaciones Web – CEAC (DAW) (2025-2027)</p>
-
-      <div class="section-title-right">Experiencia</div>
-
-      <p class="job-title">Prácticas de formación — Tuatem</p>
-      <p class="job-meta">Prácticas curriculares de 1º de DAW</p>
-
-      <p class="job-title">Community Manager — Proyecto full-stack</p>
-      <p class="job-meta">Desarrollo backend, base de datos y despliegue en la nube</p>
-      <ul>
-        <li>Desarrollo de API con <strong>Python y FastAPI</strong>, usando SQLAlchemy para la comunicación con la base de datos.</li>
-        <li>Diseño y gestión de una base de datos <strong>MySQL</strong> alojada en Aiven.</li>
-        <li>Despliegue de la aplicación en una arquitectura <strong>serverless</strong>, usando <strong>AWS Lambda y AWS SAM</strong>, con Mangum como adaptador.</li>
-        <li>Despliegue del frontend (React + Vite) en <strong>Vercel</strong>.</li>
-        <li>Resolución de problemas propios de producción: configuración de CORS, cold starts en Lambda y conexión estable con base de datos externa.</li>
-      </ul>
-
-      <div class="section-title-right">Competencias y habilidades</div>
-      <ul>
-        <li>Aprendizaje autónomo</li>
-        <li>Pensamiento lógico</li>
-        <li>Creatividad en el diseño web</li>
-        <li>Organización y disciplina</li>
-        <li>Capacidad de adaptación</li>
-      </ul>
-
-      <div class="section-title-right">Conocimientos informáticos</div>
-      <ul>
-        <li>HTML, CSS, JavaScript </li>
-        <li>Python, FastAPI, SQLAlchemy,PHP</li>
-        <li>MySQL</li>
-        <li>Despliegue serverless con AWS Lambda y AWS SAM</li>
-        <li>Vercel</li>
-      </ul>
-    </div>
+    <div class="section-title">Idiomas</div>
+    <p class="lang-line">
+      <strong>Español</strong> — nativo &nbsp;·&nbsp;
+      <strong>Árabe</strong> — nativo &nbsp;·&nbsp;
+      <strong>Inglés</strong> — nivel medio &nbsp;·&nbsp;
+      <strong>Francés</strong> — nivel medio
+    </p>
 
   </div>
 </body>
