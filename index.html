@@ -31,6 +31,30 @@
     border: 1px solid #ddd;
   }
 
+  /* BOTÓN DESCARGAR PDF */
+  .download-btn {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: background 0.15s, color 0.15s;
+  }
+  .download-btn:hover { background: #ffffff; color: var(--ink); }
+  .download-btn svg { width: 16px; height: 16px; }
+
   /* HEADER */
   .header { text-align: center; margin-bottom: 26px; }
 
@@ -110,11 +134,40 @@
     .page{ padding: 34px 22px 40px; }
     .row{ flex-direction: column; gap: 2px; }
     .row .right{ white-space: normal; }
+    .download-btn { top: 10px; right: 10px; padding: 8px 14px; }
+  }
+
+  /* IMPRESIÓN / PDF */
+  @page { size: A4; margin: 14mm; }
+
+  @media print {
+    body {
+      background: #ffffff;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+    .download-btn { display: none !important; }
+    .entry, .section-title { break-inside: avoid; }
+    .section-title { break-after: avoid; }
   }
 </style>
 </head>
 
 <body>
+  <button class="download-btn" id="downloadPdf" type="button" aria-label="Descargar currículum en PDF">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/>
+    </svg>
+    Descargar PDF
+  </button>
+
   <div class="page">
 
     <div class="header">
@@ -223,5 +276,20 @@
     </p>
 
   </div>
+
+  <script>
+    (function () {
+      var originalTitle = document.title;
+      var pdfName = 'CV_Iman_Kebour_Dahmoun';
+
+      // El nombre del archivo PDF sale del título del documento
+      window.addEventListener('beforeprint', function () { document.title = pdfName; });
+      window.addEventListener('afterprint',  function () { document.title = originalTitle; });
+
+      document.getElementById('downloadPdf').addEventListener('click', function () {
+        window.print();
+      });
+    })();
+  </script>
 </body>
 </html>
