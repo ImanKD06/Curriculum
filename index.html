@@ -123,6 +123,9 @@
     margin-bottom: 3px;
   }
 
+  ul.bullets li.link-line { list-style: none; margin-left: -18px; font-size: 12.5px; }
+  ul.bullets li.link-line a { color: var(--ink); }
+
   .skills-line, .lang-line {
     font-size: 13px;
     line-height: 1.7;
@@ -197,6 +200,17 @@
 
     <div class="entry">
       <div class="row">
+        <div class="left">Universitat de València (UV)</div>
+        <div class="right">Valencia, España</div>
+      </div>
+      <div class="row sub">
+        <div class="left">Grado en Nutrición Humana y Dietética (1 curso cursado)</div>
+        <div class="right">2024 – 2025</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="row">
         <div class="left">IES Benicalap</div>
         <div class="right">Valencia, España</div>
       </div>
@@ -231,10 +245,8 @@
         <div class="right">2026</div>
       </div>
       <ul class="bullets">
-        <li>Desarrollo de una solución RAG para análisis de contratos, normativas y documentación académica mediante embeddings de 768 dimensiones (Google Gemini) y búsqueda por similitud vectorial.</li>
-        <li>Construcción de la base de datos vectorial sobre PostgreSQL en Supabase con la extensión <code>pgvector</code>.</li>
-        <li>Arquitectura Backend serverless usando Python, FastAPI, SQLAlchemy, Pydantic, AWS Lambda y AWS SAM, empaquetado en contenedores Docker.</li>
-        <li>Diseño de Frontend interactivo y responsivo con React, TypeScript, Vite, Tailwind CSS y Recharts para la visualización de datos.</li>
+        <li>Permite analizar contratos y normativas mediante búsqueda semántica, con embeddings de Google Gemini y PostgreSQL (pgvector) en Supabase.</li>
+        <li>Backend serverless con Python, FastAPI y AWS Lambda (Docker); frontend con React, TypeScript y Tailwind CSS.</li>
       </ul>
     </div>
 
@@ -248,11 +260,8 @@
         <div class="right">2026</div>
       </div>
       <ul class="bullets">
-        <li>Desarrollo de API con Python y FastAPI, usando SQLAlchemy para la comunicación con la base de datos.</li>
-        <li>Diseño y gestión de una base de datos MySQL alojada en Aiven.</li>
-        <li>Despliegue de la aplicación en una arquitectura serverless con AWS Lambda y AWS SAM, usando Mangum como adaptador.</li>
-        <li>Despliegue del frontend (React + Vite) en Vercel.</li>
-        <li>Resolución de problemas de producción: configuración de CORS, cold starts en Lambda y conexión estable con base de datos externa.</li>
+        <li>API con Python y FastAPI y base de datos MySQL en Aiven, desplegada en AWS Lambda; frontend con React en Vercel.</li>
+        <li>Resolución de problemas de producción: CORS, cold starts y conexión con base de datos externa.</li>
       </ul>
     </div>
 
