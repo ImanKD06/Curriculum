@@ -81,8 +81,8 @@
     align-items: center;
     gap: 20px;
     border-top: 3px solid var(--ink);
-    padding-top: 14px;
-    margin-bottom: 14px;
+    padding-top: 12px;
+    margin-bottom: 12px;
   }
   .header h1 {
     margin: 0;
@@ -99,13 +99,25 @@
     color: var(--muted);
     line-height: 1.5;
   }
-  .photo {
-    width: 78px;
-    height: 78px;
+
+  /* FOTO: más grande y encuadrada cerca de la cara */
+  .photo-wrap {
+    width: 108px;
+    height: 108px;
     border-radius: 50%;
-    object-fit: cover;
-    border: 1.5px solid var(--ink);
+    overflow: hidden;
+    border: 2px solid var(--ink);
     flex-shrink: 0;
+    background: #f2f2f2;
+  }
+  .photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+    transform: scale(1.6);
+    transform-origin: 50% 32%;
   }
 
   /* TÍTULOS DE SECCIÓN */
@@ -137,7 +149,7 @@
     display: grid;
     grid-template-columns: 1.65fr 1fr;
     gap: 26px;
-    margin-top: 16px;
+    margin-top: 14px;
     flex: 1;
     min-height: 0;
   }
@@ -288,7 +300,9 @@
         <h1>Iman Kebour Dahmoun</h1>
         <div class="contact-line">Valencia, Valencia · CP 46015<br>kebouriman6@gmail.com · 602 099 388</div>
       </div>
-      <img class="photo" src="imagenes/iman.jpg" alt="Foto de Iman Kebour Dahmoun" />
+      <div class="photo-wrap">
+        <img class="photo" src="imagenes/iman.jpg" alt="Foto de Iman Kebour Dahmoun" />
+      </div>
     </div>
 
     <div class="section-title">Perfil</div>
@@ -429,7 +443,7 @@
             margin: 0,
             filename: 'CV_Iman_Kebour_Dahmoun.pdf',
             image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', scrollX: 0, scrollY: 0 },
+            html2canvas: { scale: 3, useCORS: true, backgroundColor: '#ffffff', scrollX: 0, scrollY: 0 },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
             pagebreak: { mode: [] }
           }).from(page).save();
