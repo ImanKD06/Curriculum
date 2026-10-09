@@ -5,181 +5,290 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Currículum Iman Kebour Dahmoun</title>
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Georgia&family=Noto+Serif:wght@400;600;700&display=swap');
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
+<style>
   :root{
     --ink: #111111;
-    --line: #111111;
+    --muted: #444444;
+    --soft: #6b6b6b;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --sans: 'Inter', Arial, Helvetica, sans-serif;
   }
 
   * { box-sizing: border-box; }
 
   body {
-    font-family: 'Noto Serif', Georgia, 'Times New Roman', serif;
+    font-family: var(--sans);
     margin: 0;
-    padding: 50px 20px;
-    background: #eeeeee;
+    padding: 40px 16px;
+    background: #e9e9e9;
     color: var(--ink);
   }
 
+  /* HOJA A4 (794 x 1123 px a 96 dpi) */
   .page {
-    max-width: 680px;
+    width: 794px;
+    height: 1120px;
     margin: 0 auto;
     background: #ffffff;
-    padding: 50px 55px 60px;
-    border: 1px solid #ddd;
+    padding: 34px 38px 30px;
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
   }
 
-  /* BOTÓN DESCARGAR PDF */
-  .download-btn {
+  /* BOTONES */
+  .actions {
     position: fixed;
-    top: 18px;
-    right: 18px;
+    top: 16px;
+    right: 16px;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    padding: 10px 18px;
-    font-family: inherit;
+    padding: 10px 16px;
+    font-family: var(--sans);
     font-size: 13px;
     font-weight: 600;
-    color: #ffffff;
+    color: #fff;
     background: var(--ink);
     border: 1px solid var(--ink);
     border-radius: 6px;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    transition: background 0.15s, color 0.15s;
+    transition: background .15s, color .15s;
   }
-  .download-btn:hover { background: #ffffff; color: var(--ink); }
-  .download-btn svg { width: 16px; height: 16px; }
+  .btn:hover { background: #fff; color: var(--ink); }
+  .btn.secondary { background: #fff; color: var(--ink); font-weight: 500; font-size: 12px; padding: 8px 14px; }
+  .btn.secondary:hover { background: var(--ink); color: #fff; }
+  .btn svg { width: 15px; height: 15px; }
 
-  /* Estilo temporal mientras se genera el PDF */
-  .page.pdf-mode { border: none; max-width: 680px; margin: 0; }
-
-  /* HEADER */
-  .header { text-align: center; margin-bottom: 26px; }
-
+  /* CABECERA */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    border-top: 3px solid var(--ink);
+    padding-top: 14px;
+    margin-bottom: 14px;
+  }
+  .header h1 {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .contact-line {
+    margin-top: 6px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
   .photo {
-    width: 84px;
-    height: 84px;
+    width: 78px;
+    height: 78px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid var(--ink);
-    margin: 0 auto 14px;
-    display: block;
+    border: 1.5px solid var(--ink);
+    flex-shrink: 0;
   }
 
-  h1 {
-    margin: 0;
-    font-size: 22px;
+  /* TÍTULOS DE SECCIÓN */
+  .section-title {
+    font-family: var(--mono);
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 4px;
+    margin: 0 0 9px;
   }
+  .section-title::before { content: "■ "; font-size: 8px; vertical-align: 1px; }
 
-  .contact-line {
-    font-size: 13px;
-    margin-top: 6px;
+  .block { margin-bottom: 17px; }
+
+  /* PERFIL */
+  p.summary {
+    font-size: 11.5px;
+    line-height: 1.55;
+    margin: 0;
+    text-align: justify;
     color: #222;
   }
 
-  /* SECTIONS */
-  .section-title {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    border-bottom: 1.4px solid var(--line);
-    padding-bottom: 3px;
-    margin: 26px 0 10px;
+  /* DOS COLUMNAS */
+  .cols {
+    display: grid;
+    grid-template-columns: 1.65fr 1fr;
+    gap: 26px;
+    margin-top: 16px;
+    flex: 1;
+    min-height: 0;
   }
 
-  p.summary {
-    font-size: 13.5px;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .entry { margin-bottom: 14px; }
+  /* ENTRADAS */
+  .entry { margin-bottom: 15px; }
   .entry:last-child { margin-bottom: 0; }
 
   .row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 20px;
+    gap: 12px;
   }
-  .row .left  { font-weight: 700; font-size: 13.5px; }
-  .row .right { font-size: 13px; white-space: nowrap; }
-
-  .row.sub .left  { font-style: italic; font-weight: 400; font-size: 13px; }
-  .row.sub .right { font-style: italic; font-size: 12.5px; color: #333; }
+  .role {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .when {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .org {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+  .place {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--soft);
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+  .proj-desc {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 3px;
+    line-height: 1.45;
+  }
 
   ul.bullets {
-    margin: 6px 0 0;
-    padding-left: 18px;
+    margin: 7px 0 0;
+    padding-left: 15px;
   }
   ul.bullets li {
-    font-size: 13px;
-    line-height: 1.55;
-    margin-bottom: 3px;
+    font-size: 11.5px;
+    line-height: 1.5;
+    margin-bottom: 4px;
+    text-align: justify;
+    color: #222;
   }
-
-  ul.bullets li.link-line { list-style: none; margin-left: -18px; font-size: 12.5px; }
+  ul.bullets li.link-line {
+    list-style: none;
+    margin-left: -15px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-align: left;
+  }
   ul.bullets li.link-line a { color: var(--ink); }
 
-  .skills-line, .lang-line {
-    font-size: 13px;
-    line-height: 1.7;
+  p.text {
+    font-size: 11.5px;
+    line-height: 1.55;
     margin: 0;
-  }
-  .skills-line strong, .lang-line strong { font-weight: 700; }
-
-  @media (max-width: 560px){
-    .page{ padding: 34px 22px 40px; }
-    .row{ flex-direction: column; gap: 2px; }
-    .row .right{ white-space: normal; }
-    .download-btn { top: 10px; right: 10px; padding: 8px 14px; }
+    color: #222;
   }
 
-  /* IMPRESIÓN / PDF */
-  @page { size: A4; margin: 14mm; }
+  /* COLUMNA DERECHA */
+  .group { margin-bottom: 11px; }
+  .group:last-child { margin-bottom: 0; }
+  .group h3 {
+    margin: 0 0 3px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.35;
+  }
+  .group p {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.6;
+    color: #222;
+  }
 
+  .edu { margin-bottom: 12px; }
+  .edu:last-child { margin-bottom: 0; }
+  .edu .degree {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .edu .years {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .edu .school {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .lang { display: flex; justify-content: space-between; font-size: 11px; line-height: 1.8; }
+  .lang strong { font-weight: 600; }
+  .lang span { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+
+  /* IMPRESIÓN */
+  @page { size: A4; margin: 0; }
   @media print {
-    body {
-      background: #ffffff;
-      padding: 0;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-    .page {
-      max-width: none;
-      margin: 0;
-      padding: 0;
-      border: none;
-    }
-    .download-btn { display: none !important; }
-    .entry, .section-title { break-inside: avoid; }
-    .section-title { break-after: avoid; }
+    body { background: #fff; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { margin: 0; box-shadow: none; width: 210mm; height: 296mm; }
+    .actions { display: none !important; }
   }
+
+  /* Mientras se genera el PDF */
+  .page.pdf-mode { box-shadow: none; margin: 0; }
 </style>
 </head>
 
 <body>
-  <button class="download-btn" id="downloadPdf" type="button" aria-label="Descargar currículum en PDF">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/>
-    </svg>
-    Descargar PDF
-  </button>
+  <div class="actions">
+    <button class="btn" id="downloadPdf" type="button" aria-label="Descargar currículum en PDF">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+      <span>Descargar PDF</span>
+    </button>
+    <button class="btn secondary" id="printPdf" type="button">PDF con texto seleccionable</button>
+  </div>
 
-  <div class="page">
+  <div class="page" id="cv">
 
     <div class="header">
+      <div>
+        <h1>Iman Kebour Dahmoun</h1>
+        <div class="contact-line">Valencia, Valencia · CP 46015<br>kebouriman6@gmail.com · 602 099 388</div>
+      </div>
       <img class="photo" src="imagenes/iman.jpg" alt="Foto de Iman Kebour Dahmoun" />
-      <h1>Iman Kebour Dahmoun</h1>
-      <div class="contact-line">Valencia, Valencia · CP 46015 · kebouriman6@gmail.com · 602 099 388</div>
     </div>
 
     <div class="section-title">Perfil</div>
@@ -188,104 +297,113 @@
       Busco una oportunidad para seguir aprendiendo y aplicar mis conocimientos en proyectos reales.
     </p>
 
-    <div class="section-title">Formación</div>
+    <div class="cols">
 
-    <div class="entry">
-      <div class="row">
-        <div class="left">CEAC</div>
-        <div class="right">Valencia, España</div>
+      <!-- COLUMNA IZQUIERDA -->
+      <div class="col-left">
+
+        <div class="block">
+          <div class="section-title">Experiencia</div>
+          <div class="entry">
+            <div class="row">
+              <div class="role">Prácticas de formación — 1º de DAW</div>
+              <div class="when">Curso 2025 – 2026</div>
+            </div>
+            <div class="org">Tuatem</div>
+            <div class="place">Valencia, España</div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">Proyectos destacados</div>
+
+          <div class="entry">
+            <div class="row">
+              <div class="role">ContextIA</div>
+              <div class="when">2026</div>
+            </div>
+            <div class="proj-desc">Plataforma web de análisis y consulta inteligente de documentos (RAG) · Proyecto personal</div>
+            <ul class="bullets">
+              <li>Permite analizar contratos y normativas mediante búsqueda semántica, con embeddings de Google Gemini y PostgreSQL (pgvector) en Supabase.</li>
+              <li>Backend serverless con Python, FastAPI y AWS Lambda (Docker); frontend con React, TypeScript y Tailwind CSS.</li>
+            </ul>
+          </div>
+
+          <div class="entry">
+            <div class="row">
+              <div class="role">Community Manager</div>
+              <div class="when">2026</div>
+            </div>
+            <div class="proj-desc">Desarrollo full-stack · Proyecto personal</div>
+            <ul class="bullets">
+              <li>API con Python y FastAPI y base de datos MySQL en Aiven, desplegada en AWS Lambda; frontend con React en Vercel.</li>
+              <li>Resolución de problemas de producción: CORS, cold starts y conexión con base de datos externa.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">Competencias y habilidades</div>
+          <p class="text">Aprendizaje autónomo, pensamiento lógico, creatividad en el diseño web, organización y disciplina, capacidad de adaptación.</p>
+        </div>
+
       </div>
-      <div class="row sub">
-        <div class="left">Grado Superior en Desarrollo de Aplicaciones Web (DAW)</div>
-        <div class="right">2025 – 2027</div>
+
+      <!-- COLUMNA DERECHA -->
+      <div class="col-right">
+
+        <div class="block">
+          <div class="section-title">Conocimientos informáticos</div>
+          <div class="group">
+            <h3>Lenguajes y frameworks</h3>
+            <p>HTML · CSS · JavaScript · TypeScript · React · Vite · Tailwind CSS · Python · FastAPI · SQLAlchemy · Pydantic · PHP</p>
+          </div>
+          <div class="group">
+            <h3>Bases de datos</h3>
+            <p>PostgreSQL (pgvector) · MySQL</p>
+          </div>
+          <div class="group">
+            <h3>Inteligencia Artificial</h3>
+            <p>Google Gemini API · Embeddings · Arquitectura RAG · Búsqueda Vectorial</p>
+          </div>
+          <div class="group">
+            <h3>Despliegue e infraestructura</h3>
+            <p>AWS Lambda · AWS SAM · Docker · Supabase · Vercel</p>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">Formación</div>
+
+          <div class="edu">
+            <div class="degree">Grado Superior en Desarrollo de Aplicaciones Web (DAW)</div>
+            <div class="years">2025 – 2027</div>
+            <div class="school">CEAC · Valencia, España</div>
+          </div>
+
+          <div class="edu">
+            <div class="degree">Grado en Nutrición Humana y Dietética (1 curso cursado)</div>
+            <div class="years">2024 – 2025</div>
+            <div class="school">Universitat de València (UV)</div>
+          </div>
+
+          <div class="edu">
+            <div class="degree">Bachillerato de Ciencias</div>
+            <div class="years">2022 – 2024</div>
+            <div class="school">IES Benicalap · Valencia, España</div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">Idiomas</div>
+          <div class="lang"><strong>Español</strong><span>Nativo</span></div>
+          <div class="lang"><strong>Árabe</strong><span>Nativo</span></div>
+          <div class="lang"><strong>Inglés</strong><span>Nivel medio</span></div>
+          <div class="lang"><strong>Francés</strong><span>Nivel medio</span></div>
+        </div>
+
       </div>
     </div>
-
-    <div class="entry">
-      <div class="row">
-        <div class="left">Universitat de València (UV)</div>
-        <div class="right">Valencia, España</div>
-      </div>
-      <div class="row sub">
-        <div class="left">Grado en Nutrición Humana y Dietética (1 curso cursado)</div>
-        <div class="right">2024 – 2025</div>
-      </div>
-    </div>
-
-    <div class="entry">
-      <div class="row">
-        <div class="left">IES Benicalap</div>
-        <div class="right">Valencia, España</div>
-      </div>
-      <div class="row sub">
-        <div class="left">Bachillerato de Ciencias</div>
-        <div class="right">2022 – 2024</div>
-      </div>
-    </div>
-
-    <div class="section-title">Experiencia</div>
-
-    <div class="entry">
-      <div class="row">
-        <div class="left">Tuatem</div>
-        <div class="right">Valencia, España</div>
-      </div>
-      <div class="row sub">
-        <div class="left">Prácticas de formación — 1º de DAW</div>
-        <div class="right">Curso 2025 – 2026</div>
-      </div>
-    </div>
-
-    <div class="section-title">Proyectos destacados</div>
-
-    <div class="entry">
-      <div class="row">
-        <div class="left">ContextIA</div>
-        <div class="right">Proyecto personal</div>
-      </div>
-      <div class="row sub">
-        <div class="left">Plataforma web de análisis y consulta inteligente de documentos (RAG)</div>
-        <div class="right">2026</div>
-      </div>
-      <ul class="bullets">
-        <li>Permite analizar contratos y normativas mediante búsqueda semántica, con embeddings de Google Gemini y PostgreSQL (pgvector) en Supabase.</li>
-        <li>Backend serverless con Python, FastAPI y AWS Lambda (Docker); frontend con React, TypeScript y Tailwind CSS.</li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="row">
-        <div class="left">Community Manager</div>
-        <div class="right">Proyecto personal</div>
-      </div>
-      <div class="row sub">
-        <div class="left">Desarrollo full-stack</div>
-        <div class="right">2026</div>
-      </div>
-      <ul class="bullets">
-        <li>API con Python y FastAPI y base de datos MySQL en Aiven, desplegada en AWS Lambda; frontend con React en Vercel.</li>
-        <li>Resolución de problemas de producción: CORS, cold starts y conexión con base de datos externa.</li>
-      </ul>
-    </div>
-
-    <div class="section-title">Competencias y habilidades</div>
-    <p class="skills-line">Aprendizaje autónomo, pensamiento lógico, creatividad en el diseño web, organización y disciplina, capacidad de adaptación.</p>
-
-    <div class="section-title">Conocimientos informáticos</div>
-    <p class="skills-line">
-      <strong>Lenguajes y frameworks:</strong> HTML, CSS, JavaScript, TypeScript, React, Vite, Tailwind CSS, Python, FastAPI, SQLAlchemy, Pydantic, PHP<br>
-      <strong>Bases de datos:</strong> PostgreSQL (pgvector), MySQL<br>
-      <strong>Inteligencia Artificial:</strong> Google Gemini API, Embeddings, Arquitectura RAG, Búsqueda Vectorial<br>
-      <strong>Despliegue e infraestructura:</strong> AWS Lambda, AWS SAM, Docker, Supabase, Vercel
-    </p>
-
-    <div class="section-title">Idiomas</div>
-    <p class="lang-line">
-      <strong>Español</strong> — nativo &nbsp;·&nbsp;
-      <strong>Árabe</strong> — nativo &nbsp;·&nbsp;
-      <strong>Inglés</strong> — nivel medio &nbsp;·&nbsp;
-      <strong>Francés</strong> — nivel medio
-    </p>
 
   </div>
 
@@ -293,32 +411,43 @@
   <script>
     (function () {
       var btn = document.getElementById('downloadPdf');
-      var page = document.querySelector('.page');
-      var label = btn.innerHTML;
+      var label = btn.querySelector('span');
+      var page = document.getElementById('cv');
+      var originalTitle = document.title;
 
-      btn.addEventListener('click', function () {
+      // PDF directo (imagen de la hoja, una sola página A4)
+      btn.addEventListener('click', async function () {
         btn.disabled = true;
         btn.style.opacity = '0.7';
-        btn.lastChild.textContent = ' Generando…';
+        label.textContent = 'Generando…';
         page.classList.add('pdf-mode');
+        window.scrollTo(0, 0);
 
-        html2pdf().set({
-          margin: [10, 10, 10, 10],
-          filename: 'CV_Iman_Kebour_Dahmoun.pdf',
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
-          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-          pagebreak: { mode: ['css', 'legacy'], avoid: ['.entry', '.section-title'] }
-        }).from(page).save().catch(function (err) {
+        try {
+          if (document.fonts && document.fonts.ready) { await document.fonts.ready; }
+          await html2pdf().set({
+            margin: 0,
+            filename: 'CV_Iman_Kebour_Dahmoun.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', scrollX: 0, scrollY: 0 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            pagebreak: { mode: [] }
+          }).from(page).save();
+        } catch (err) {
           console.error(err);
-          alert('No se pudo generar el PDF. Si abriste el archivo directamente desde el disco, prueba a abrirlo desde un servidor local o desde tu web publicada.');
-        }).finally(function () {
+          alert('No se pudo generar el PDF. Si abriste el archivo directamente desde el disco, prueba desde un servidor local o desde tu web publicada, o usa el botón "PDF con texto seleccionable".');
+        } finally {
           page.classList.remove('pdf-mode');
           btn.disabled = false;
           btn.style.opacity = '';
-          btn.innerHTML = label;
-        });
+          label.textContent = 'Descargar PDF';
+        }
       });
+
+      // PDF con texto real (diálogo de impresión → Guardar como PDF)
+      window.addEventListener('beforeprint', function () { document.title = 'CV_Iman_Kebour_Dahmoun'; });
+      window.addEventListener('afterprint',  function () { document.title = originalTitle; });
+      document.getElementById('printPdf').addEventListener('click', function () { window.print(); });
     })();
   </script>
 </body>
