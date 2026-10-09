@@ -55,6 +55,9 @@
   .download-btn:hover { background: #ffffff; color: var(--ink); }
   .download-btn svg { width: 16px; height: 16px; }
 
+  /* Estilo temporal mientras se genera el PDF */
+  .page.pdf-mode { border: none; max-width: 680px; margin: 0; }
+
   /* HEADER */
   .header { text-align: center; margin-bottom: 26px; }
 
@@ -247,6 +250,7 @@
       <ul class="bullets">
         <li>Permite analizar contratos y normativas mediante búsqueda semántica, con embeddings de Google Gemini y PostgreSQL (pgvector) en Supabase.</li>
         <li>Backend serverless con Python, FastAPI y AWS Lambda (Docker); frontend con React, TypeScript y Tailwind CSS.</li>
+        <li class="link-line">GitHub: <a href="https://github.com/TU-USUARIO/contextia">github.com/TU-USUARIO/contextia</a></li>
       </ul>
     </div>
 
@@ -262,6 +266,7 @@
       <ul class="bullets">
         <li>API con Python y FastAPI y base de datos MySQL en Aiven, desplegada en AWS Lambda; frontend con React en Vercel.</li>
         <li>Resolución de problemas de producción: CORS, cold starts y conexión con base de datos externa.</li>
+        <li class="link-line">GitHub: <a href="https://github.com/TU-USUARIO/community-manager">github.com/TU-USUARIO/community-manager</a></li>
       </ul>
     </div>
 
@@ -286,17 +291,35 @@
 
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
     (function () {
-      var originalTitle = document.title;
-      var pdfName = 'CV_Iman_Kebour_Dahmoun';
+      var btn = document.getElementById('downloadPdf');
+      var page = document.querySelector('.page');
+      var label = btn.innerHTML;
 
-      // El nombre del archivo PDF sale del título del documento
-      window.addEventListener('beforeprint', function () { document.title = pdfName; });
-      window.addEventListener('afterprint',  function () { document.title = originalTitle; });
+      btn.addEventListener('click', function () {
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+        btn.lastChild.textContent = ' Generando…';
+        page.classList.add('pdf-mode');
 
-      document.getElementById('downloadPdf').addEventListener('click', function () {
-        window.print();
+        html2pdf().set({
+          margin: [10, 10, 10, 10],
+          filename: 'CV_Iman_Kebour_Dahmoun.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+          pagebreak: { mode: ['css', 'legacy'], avoid: ['.entry', '.section-title'] }
+        }).from(page).save().catch(function (err) {
+          console.error(err);
+          alert('No se pudo generar el PDF. Si abriste el archivo directamente desde el disco, prueba a abrirlo desde un servidor local o desde tu web publicada.');
+        }).finally(function () {
+          page.classList.remove('pdf-mode');
+          btn.disabled = false;
+          btn.style.opacity = '';
+          btn.innerHTML = label;
+        });
       });
     })();
   </script>
