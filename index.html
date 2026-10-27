@@ -37,8 +37,8 @@
     padding: 30px 38px 26px;
     overflow: hidden;
     box-shadow: 0 2px 14px rgba(0,0,0,0.12);
-    display: flex;
-    flex-direction: column;
+    border-top: 3px solid var(--ink);
+    background-clip: padding-box;
   }
 
   /* BOTONES */
@@ -74,53 +74,64 @@
   .btn.secondary:hover { background: var(--ink); color: #fff; }
   .btn svg { width: 15px; height: 15px; }
 
-  /* CABECERA */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    border-top: 3px solid var(--ink);
-    padding-top: 12px;
-    margin-bottom: 12px;
+  /* ESTRUCTURA: barra lateral + contenido */
+  .layout {
+    display: grid;
+    grid-template-columns: 232px 1fr;
+    gap: 22px;
+    height: 100%;
   }
-  .header h1 {
+
+  .sidebar {
+    border-right: 1.5px solid var(--ink);
+    padding-right: 20px;
+    min-width: 0;
+  }
+  .main { min-width: 0; }
+
+  /* FOTO */
+  .photo-wrap {
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f2f2f2;
+    line-height: 0;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 16px;
+  }
+  .photo {
+    display: block;
+    height: 128px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  /* CABECERA (nombre) */
+  .name h1 {
     margin: 0;
     font-family: var(--mono);
     font-size: 24px;
     font-weight: 700;
     letter-spacing: 0.02em;
     text-transform: uppercase;
+    line-height: 1.15;
   }
-  .contact-line {
-    margin-top: 6px;
+  .name .subtitle {
+    margin-top: 7px;
     font-family: var(--mono);
     font-size: 10.5px;
     color: var(--muted);
-    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
-  .contact-line a { color: var(--ink); text-decoration: underline; }
-
-  /* FOTO completa, sin recortar */
-  .photo-wrap {
-    flex-shrink: 0;
-    border: 2px solid var(--ink);
-    border-radius: 10px;
-    overflow: hidden;
-    background: #f2f2f2;
-    line-height: 0;
-  }
-  .photo {
-    display: block;
-    height: 110px;
-    width: auto;
-    max-width: 150px;
-    object-fit: contain;
-  }
-
-  /* TÍTULOS DE SECCIÓN */
+  /* TÍTULOS DE SECCIÓN (con icono) */
   .section-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
     font-family: var(--mono);
     font-size: 11px;
     font-weight: 700;
@@ -130,59 +141,79 @@
     padding-bottom: 4px;
     margin: 0 0 9px;
   }
-  .section-title::before { content: "■ "; font-size: 8px; vertical-align: 1px; }
+  .section-title svg {
+    width: 14px; height: 14px; flex-shrink: 0;
+    fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  }
 
   .block { margin-bottom: 15px; }
+  .name { margin-bottom: 18px; }
+  .main .block { margin-bottom: 20px; }
 
-  /* PERFIL */
-  p.summary {
-    font-size: 11.5px;
-    line-height: 1.55;
-    margin: 0 0 14px;
-    text-align: justify;
-    color: #222;
-  }
-
-  /* STACK TÉCNICO (etiquetas) */
-  .stack {
-    display: grid;
-    grid-template-columns: 112px 1fr;
-    column-gap: 12px;
-    row-gap: 7px;
-    align-items: start;
-  }
-  .stack .lbl {
+  /* CONTACTO */
+  .ct { margin-bottom: 7px; }
+  .ct .k {
+    display: block;
     font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    padding-top: 5px;
+    font-size: 9px;
+    color: var(--soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
-  .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .ct .v {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.4;
+    color: var(--ink);
+    word-break: break-all;
+  }
+  .ct .v a { color: var(--ink); text-decoration: underline; }
+
+  /* IDIOMAS */
+  .lang { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 11px; line-height: 1.8; }
+  .lang strong { font-weight: 600; }
+  .lang span { font-family: var(--mono); font-size: 10px; color: var(--muted); text-align: right; }
+  .lang-note { font-family: var(--mono); font-size: 9.5px; color: var(--soft); text-align: right; margin-top: -3px; line-height: 1.4; }
+
+  /* HABILIDADES (etiquetas) */
+  .sk { margin-bottom: 8px; }
+  .sk .lbl {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 3px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
   .chip {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 10.5px;
     font-weight: 500;
     line-height: 1.2;
     color: var(--ink);
     background: #fafafa;
     border: 1px solid #b8b8b8;
     border-radius: 4px;
-    padding: 4px 9px;
+    padding: 3px 7px;
     white-space: nowrap;
   }
 
-  /* DOS COLUMNAS */
-  .cols {
-    display: grid;
-    grid-template-columns: 1.65fr 1fr;
-    gap: 26px;
-    margin-top: 14px;
-    flex: 1;
-    min-height: 0;
+  ul.plain { margin: 0; padding-left: 15px; }
+  ul.plain li { font-size: 11px; line-height: 1.55; color: #222; margin-bottom: 1px; }
+
+  /* PERFIL */
+  p.summary {
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
+    color: #222;
   }
 
   /* ENTRADAS */
-  .entry { margin-bottom: 14px; }
+  .entry { margin-bottom: 16px; }
   .entry:last-child { margin-bottom: 0; }
 
   .row {
@@ -192,7 +223,7 @@
     gap: 12px;
   }
   .role {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 700;
     text-transform: uppercase;
     line-height: 1.3;
@@ -205,12 +236,12 @@
   }
   .org {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 700;
     text-transform: uppercase;
     margin-top: 3px;
   }
-  .place {
+  .place, .school {
     font-family: var(--mono);
     font-size: 10px;
     color: var(--soft);
@@ -231,8 +262,8 @@
   }
   ul.bullets li {
     font-size: 11.5px;
-    line-height: 1.5;
-    margin-bottom: 3px;
+    line-height: 1.55;
+    margin-bottom: 4px;
     text-align: justify;
     color: #222;
   }
@@ -240,45 +271,11 @@
     list-style: none;
     margin-left: -15px;
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 9.5px;
     text-align: left;
+    word-break: break-all;
   }
   ul.bullets li.link-line a { color: var(--ink); }
-
-  p.text {
-    font-size: 11.5px;
-    line-height: 1.55;
-    margin: 0;
-    color: #222;
-  }
-
-  /* COLUMNA DERECHA */
-  .edu { margin-bottom: 12px; }
-  .edu:last-child { margin-bottom: 0; }
-  .edu .degree {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    line-height: 1.3;
-  }
-  .edu .years {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 700;
-    margin-top: 2px;
-  }
-  .edu .school {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-
-  .lang { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 11px; line-height: 1.8; }
-  .lang strong { font-weight: 600; }
-  .lang span { font-family: var(--mono); font-size: 10px; color: var(--muted); text-align: right; }
-  .lang-note { font-family: var(--mono); font-size: 9.5px; color: var(--soft); text-align: right; margin-top: -3px; line-height: 1.4; }
 
   /* IMPRESIÓN */
   @page { size: A4; margin: 0; }
@@ -303,69 +300,130 @@
   </div>
 
   <div class="page" id="cv">
+    <div class="layout">
 
-    <div class="header">
-      <div>
-        <h1>Iman Kebour Dahmoun</h1>
-        <div class="contact-line">Valencia, Valencia · CP 46015<br>kebouriman6@gmail.com · 602 099 388<br>Portfolio: <a href="https://github.com/ImanKD06/Portafolio">github.com/ImanKD06/Portafolio</a><br>GitHub: <a href="https://github.com/ImanKD06">github.com/ImanKD06</a><br>LinkedIn: <a href="https://www.linkedin.com/in/imankebourdahmoun/">linkedin.com/in/imankebourdahmoun</a></div>
-      </div>
-      <div class="photo-wrap">
-        <img class="photo" src="imagenes/iman.jpg" alt="Foto de Iman Kebour Dahmoun" />
-      </div>
-    </div>
+      <!-- ========== BARRA LATERAL ========== -->
+      <aside class="sidebar">
 
-    <div class="section-title">Perfil</div>
-    <p class="summary">
-     Estudiante de Desarrollo de Aplicaciones Web (DAW), con experiencia en desarrollo full-stack, automatización e integración de inteligencia artificial. 
-      He desarrollado herramientas web durante mis prácticas en empresa y proyectos propios con Python, FastAPI, React y bases de datos relacionales. 
-      Interesada en el desarrollo de software, la integración de sistemas y la creación de soluciones tecnológicas para problemas reales.
-    </p>
-
-    <div class="section-title">Stack técnico</div>
-    <div class="stack">
-      <div class="lbl">Frontend</div>
-      <div class="chips">
-        <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Tailwind</span>
-      </div>
-
-      <div class="lbl">Backend</div>
-      <div class="chips">
-        <span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">SQLAlchemy</span><span class="chip">Pydantic</span><span class="chip">PHP</span>
-      </div>
-
-      <div class="lbl">Bases de datos</div>
-      <div class="chips">
-        <span class="chip">PostgreSQL</span><span class="chip">pgvector</span><span class="chip">MySQL</span>
-      </div>
-
-      <div class="lbl">IA</div>
-      <div class="chips">
-        <span class="chip">Google Gemini API</span><span class="chip">Embeddings</span><span class="chip">RAG</span><span class="chip">Búsqueda vectorial</span>
-      </div>
-
-      <div class="lbl">Despliegue</div>
-      <div class="chips">
-        <span class="chip">AWS Lambda</span><span class="chip">AWS SAM</span><span class="chip">Docker</span><span class="chip">Supabase</span><span class="chip">Vercel</span>
-      </div>
-
-      <div class="lbl">Herramientas</div>
-      <div class="chips">
-        <span class="chip">Git</span><span class="chip">GitHub</span>
-      </div>
-    </div>
-
-    <div class="cols">
-
-      <!-- COLUMNA IZQUIERDA -->
-      <div class="col-left">
+        <div class="photo-wrap">
+          <img class="photo" src="imagenes/iman.jpg" alt="Foto de Iman Kebour Dahmoun" />
+        </div>
 
         <div class="block">
-          <div class="section-title">Experiencia profesional</div>
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+            Contacto
+          </div>
+          <div class="ct"><span class="k">Ubicación</span><span class="v">Valencia, Valencia · CP 46015</span></div>
+          <div class="ct"><span class="k">Email</span><span class="v">kebouriman6@gmail.com</span></div>
+          <div class="ct"><span class="k">Teléfono</span><span class="v">602 099 388</span></div>
+          <div class="ct"><span class="k">Portfolio</span><span class="v"><a href="https://github.com/ImanKD06/Portafolio">github.com/ImanKD06/Portafolio</a></span></div>
+          <div class="ct"><span class="k">GitHub</span><span class="v"><a href="https://github.com/ImanKD06">github.com/ImanKD06</a></span></div>
+          <div class="ct"><span class="k">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/imankebourdahmoun/">linkedin.com/in/imankebourdahmoun</a></span></div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Idiomas
+          </div>
+          <div class="lang"><strong>Español</strong><span>Nativo</span></div>
+          <div class="lang"><strong>Árabe</strong><span>Nativo</span></div>
+          <div class="lang"><strong>Inglés</strong><span>B2</span></div>
+          <div class="lang"><strong>Francés</strong><span>Comprensión muy alta</span></div>
+          <div class="lang-note">Expresión oral menos practicada</div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>
+            Habilidades
+          </div>
+
+          <div class="sk"><div class="lbl">Frontend</div>
+            <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Tailwind</span></div>
+          </div>
+          <div class="sk"><div class="lbl">Backend</div>
+            <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">SQLAlchemy</span><span class="chip">Pydantic</span><span class="chip">PHP</span></div>
+          </div>
+          <div class="sk"><div class="lbl">Bases de datos</div>
+            <div class="chips"><span class="chip">PostgreSQL</span><span class="chip">pgvector</span><span class="chip">MySQL</span></div>
+          </div>
+          <div class="sk"><div class="lbl">IA</div>
+            <div class="chips"><span class="chip">Google Gemini API</span><span class="chip">Embeddings</span><span class="chip">RAG</span><span class="chip">Búsqueda vectorial</span></div>
+          </div>
+          <div class="sk"><div class="lbl">Despliegue</div>
+            <div class="chips"><span class="chip">AWS Lambda</span><span class="chip">AWS SAM</span><span class="chip">Docker</span><span class="chip">Supabase</span><span class="chip">Vercel</span></div>
+          </div>
+          <div class="sk"><div class="lbl">Herramientas</div>
+            <div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span></div>
+          </div>
+        </div>
+
+        <div class="block" style="margin-bottom:0">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            Competencias
+          </div>
+          <ul class="plain">
+            <li>Aprendizaje autónomo</li>
+            <li>Pensamiento lógico</li>
+            <li>Creatividad en el diseño web</li>
+            <li>Organización y disciplina</li>
+            <li>Capacidad de adaptación</li>
+          </ul>
+        </div>
+
+      </aside>
+
+      <!-- ========== CONTENIDO PRINCIPAL ========== -->
+      <main class="main">
+
+        <div class="name">
+          <h1>Iman Kebour Dahmoun</h1>
+          <div class="subtitle">Estudiante de Desarrollo de Aplicaciones Web</div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Sobre mí
+          </div>
+          <p class="summary">
+            Estudiante de Desarrollo de Aplicaciones Web (DAW), con experiencia práctica en desarrollo de aplicaciones full-stack,
+            automatización e integración de inteligencia artificial. He desarrollado proyectos individuales durante mis prácticas
+            en empresa y creado aplicaciones con Python, FastAPI, React y bases de datos relacionales. Interesada en el desarrollo
+            de software, la integración de sistemas y la creación de soluciones tecnológicas para problemas reales.
+          </p>
+        </div>
+
+        <div class="block">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            Formación académica
+          </div>
+
           <div class="entry">
-            <div class="row">
-              <div class="role">Desarrolladora web en prácticas</div>
-              <div class="when">3 meses · Curso 2025 – 2026</div>
-            </div>
+            <div class="row"><div class="role">Grado Superior en Desarrollo de Aplicaciones Web (DAW)</div><div class="when">2025 – 2027</div></div>
+            <div class="school">CEAC · Valencia, España</div>
+          </div>
+          <div class="entry">
+            <div class="row"><div class="role">Grado en Nutrición Humana y Dietética (1 curso cursado)</div><div class="when">2024 – 2025</div></div>
+            <div class="school">Universitat de València (UV)</div>
+          </div>
+          <div class="entry">
+            <div class="row"><div class="role">Bachillerato de Ciencias</div><div class="when">2022 – 2024</div></div>
+            <div class="school">IES Benicalap · Valencia, España</div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            Experiencia profesional
+          </div>
+          <div class="entry">
+            <div class="row"><div class="role">Desarrolladora web en prácticas</div><div class="when">3 meses · Curso 2025 – 2026</div></div>
             <div class="org">Tuatem</div>
             <div class="place">Valencia, España</div>
             <ul class="bullets">
@@ -377,79 +435,36 @@
         </div>
 
         <div class="block" style="margin-bottom:0">
-          <div class="section-title">Proyectos destacados</div>
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+            Proyectos destacados
+          </div>
 
           <div class="entry">
-            <div class="row">
-              <div class="role">ContextIA — Análisis documental con IA</div>
-              <div class="when">2026</div>
-            </div>
+            <div class="row"><div class="role">ContextIA — Análisis documental con IA</div><div class="when">2026</div></div>
             <div class="proj-desc">Proyecto personal</div>
             <ul class="bullets">
               <li>Plataforma para consultar y analizar documentos mediante recuperación aumentada por generación (RAG).</li>
               <li>Procesamiento documental, embeddings y búsqueda semántica con PostgreSQL y pgvector.</li>
               <li>Backend con Python, FastAPI, SQLAlchemy y Pydantic, integrado con Google Gemini.</li>
               <li>Despliegue con AWS Lambda y AWS SAM; frontend con React y TypeScript.</li>
+              <li class="link-line">GitHub: <a href="https://github.com/TU-USUARIO/contextia">github.com/TU-USUARIO/contextia</a></li>
             </ul>
           </div>
 
           <div class="entry">
-            <div class="row">
-              <div class="role">Community Manager</div>
-              <div class="when">2026</div>
-            </div>
+            <div class="row"><div class="role">Community Manager</div><div class="when">2026</div></div>
             <div class="proj-desc">Desarrollo full-stack · Proyecto personal</div>
             <ul class="bullets">
               <li>API con Python y FastAPI y base de datos MySQL en Aiven, desplegada en AWS Lambda; frontend con React en Vercel.</li>
               <li>Resolución de problemas de producción: CORS, cold starts y conexión con base de datos externa.</li>
+              <li class="link-line">GitHub: <a href="https://github.com/TU-USUARIO/community-manager">github.com/TU-USUARIO/community-manager</a></li>
             </ul>
           </div>
         </div>
 
-      </div>
-
-      <!-- COLUMNA DERECHA -->
-      <div class="col-right">
-
-        <div class="block">
-          <div class="section-title">Formación</div>
-
-          <div class="edu">
-            <div class="degree">Grado Superior en Desarrollo de Aplicaciones Web (DAW)</div>
-            <div class="years">2025 – 2027</div>
-            <div class="school">CEAC · Valencia, España</div>
-          </div>
-
-          <div class="edu">
-            <div class="degree">Grado en Nutrición Humana y Dietética (1 curso cursado)</div>
-            <div class="years">2024 – 2025</div>
-            <div class="school">Universitat de València (UV)</div>
-          </div>
-
-          <div class="edu">
-            <div class="degree">Bachillerato de Ciencias</div>
-            <div class="years">2022 – 2024</div>
-            <div class="school">IES Benicalap · Valencia, España</div>
-          </div>
-        </div>
-
-        <div class="block">
-          <div class="section-title">Competencias</div>
-          <p class="text">Aprendizaje autónomo, pensamiento lógico, creatividad en el diseño web, organización y disciplina, capacidad de adaptación.</p>
-        </div>
-
-        <div class="block" style="margin-bottom:0">
-          <div class="section-title">Idiomas</div>
-          <div class="lang"><strong>Español</strong><span>Nativo</span></div>
-          <div class="lang"><strong>Árabe</strong><span>Nativo</span></div>
-          <div class="lang"><strong>Inglés</strong><span>B2</span></div>
-          <div class="lang"><strong>Francés</strong><span>Comprensión muy alta</span></div>
-          <div class="lang-note">Expresión oral menos practicada</div>
-        </div>
-
-      </div>
+      </main>
     </div>
-
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
